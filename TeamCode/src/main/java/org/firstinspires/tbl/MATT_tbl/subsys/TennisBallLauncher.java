@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.MATT_tbl;
+package org.firstinspires.tbl.MATT_tbl.subsys;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.tbl.lib.Toggler;
 
 /**
  * Created by Lucy Wang on 11/9/2016.
@@ -9,17 +11,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class TennisBallLauncher
 {
-    private DcMotor topFly;
-    private DcMotor bottomFly;
-    private DcMotor clover;
+    private Flywheel flywheel;
+    private BallDistributor ballDistributor;
 
     private Toggler topSpinToggle = new Toggler(2);
 
     public TennisBallLauncher(HardwareMap map)
     {
-        topFly = map.dcMotor.get("topFly");
-        bottomFly = map.dcMotor.get("bottomFly");
-        clover = map.dcMotor.get("clover");
+        flywheel = new Flywheel(map);
+        ballDistributor = new BallDistributor(map);
     }
 
     public void runFlywheel(double topPower, double bottomPower)
