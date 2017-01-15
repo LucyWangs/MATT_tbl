@@ -29,7 +29,6 @@ public class Flywheel
     private Toggler flywheelPowerToggle = new Toggler(topPowers.length); //toggle through power settings for flywheel
     private Toggler flywheelToggle = new Toggler(2); //toggle between on and off for flywheel
     private Toggler motorToggle = new Toggler(2); //toggle between top and bottom fly for rpm change
-    private Toggler rpmToggle = new Toggler(101); //toggle between multiple power levels to change rpm
 
     public Flywheel(HardwareMap map)
     {
@@ -100,16 +99,36 @@ public class Flywheel
 
     public void changeRPM(boolean up, boolean down)
     {
-        rpmToggle.changeState(up, down);
         switch(motorToggle.currentState())
         {
             case 0:
-                //Change top fly motor power
-                double power = topFly.getPower() * 100;
+                if(up) {topFlyPower++;}
+                else {topFlyPower--;}
                 break;
             case 1:
-                //Change bottom fly motor power
+                if(up) {bottomFlyPower++;}
+                else {bottomFlyPower--;}
                 break;
         }
+    }
+
+    public String getFlywheelMode()
+    {
+        return flywheelMode;
+    }
+
+    public String getChosenMotorToChange()
+    {
+        return chosenMotorToChange;
+    }
+
+    public String getTopMotorPowerLevel()
+    {
+        return "" + topFlyPower;
+    }
+
+    public String getBottomMotorPowerLevel()
+    {
+        return "" + bottomFlyPower;
     }
 }

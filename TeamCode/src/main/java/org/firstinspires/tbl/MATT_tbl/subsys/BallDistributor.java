@@ -12,15 +12,30 @@ import org.firstinspires.tbl.lib.Toggler;
 
 public class BallDistributor
 {
-    private DcMotor cloverMotor;
     private Servo ballGate;
-
-    private Toggler ballDistributionToggler = new Toggler(2);
+    private String gateStatus;
 
     public BallDistributor(HardwareMap map)
     {
-        cloverMotor = map.dcMotor.get("cloverMotor");
         ballGate = map.servo.get("ballGate");
     }
 
+    public void activateBallGate(boolean lbumper)
+    {
+        if(lbumper)
+        {
+            ballGate.setPosition(0.0);
+            gateStatus = "Open";
+        }
+        else
+        {
+            ballGate.setPosition(1.0);
+            gateStatus = "Closed";
+        }
+    }
+
+    public String getGateStatus()
+    {
+        return gateStatus;
+    }
 }

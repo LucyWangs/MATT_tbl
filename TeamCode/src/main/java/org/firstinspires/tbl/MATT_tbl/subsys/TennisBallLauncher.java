@@ -11,8 +11,8 @@ import org.firstinspires.tbl.lib.Toggler;
 
 public class TennisBallLauncher
 {
-    private Flywheel flywheel;
-    private BallDistributor ballDistributor;
+    public Flywheel flywheel;
+    public BallDistributor ballDistributor;
 
     private Toggler topSpinToggle = new Toggler(2);
 
@@ -20,25 +20,5 @@ public class TennisBallLauncher
     {
         flywheel = new Flywheel(map);
         ballDistributor = new BallDistributor(map);
-    }
-
-    public void runFlywheel(double topPower, double bottomPower)
-    {
-
-    }
-
-    public void runTopSpin(boolean trigger)
-    {
-        topSpinToggle.changeState(trigger);
-        switch(topSpinToggle.currentState())
-        {
-            case 0:
-
-                break;
-            case 1:
-
-                break;
-
-        }
     }
 }
