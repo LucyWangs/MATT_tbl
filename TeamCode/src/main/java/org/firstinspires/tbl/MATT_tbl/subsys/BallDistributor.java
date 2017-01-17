@@ -15,6 +15,8 @@ public class BallDistributor
     private Servo ballGate;
     private String gateStatus;
 
+    private Toggler gateToggler = new Toggler(2);
+
     public BallDistributor(HardwareMap map)
     {
         ballGate = map.servo.get("ballGate");
@@ -22,16 +24,33 @@ public class BallDistributor
 
     public void activateBallGate(boolean lbumper)
     {
-        if(lbumper)
+        gateToggler.changeState(lbumper);
+
+        switch(gateToggler.currentState())
         {
-            ballGate.setPosition(0.0);
+            case 0:
+                ballGate.setPosition(0.85);
+                gateStatus = "Closed";
+                break;
+            case 1:
+                ballGate.setPosition(0.3);
+                gateStatus = "Open";
+        }
+
+        /*if(lbumper)
+        {
+            ballGate.setPosition(1.0);
             gateStatus = "Open";
         }
         else
         {
-            ballGate.setPosition(1.0);
+            ballGate.setPosition(0.4);
             gateStatus = "Closed";
-        }
+        }*/
+    }
+
+    public void activateBallGate(double ltrigger)
+    {
     }
 
     public String getGateStatus()

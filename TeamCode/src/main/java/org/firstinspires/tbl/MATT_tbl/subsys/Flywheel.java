@@ -1,6 +1,7 @@
 package org.firstinspires.tbl.MATT_tbl.subsys;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -16,9 +17,9 @@ public class Flywheel
     private DcMotor topFly; //top motor of the flywheel
     private DcMotor bottomFly; //bottom motor of the flywheel
 
-    private double[] topPowers = {0.70, 0.75, 0.80, 0.85}; //power settings for the top flywheel
+    private double[] topPowers = {0.75, 0.40, 0.75}; //power settings for the top flywheel
     private double topFlyPower; //power set for the top flywheel
-    private double[] bottomPowers = {0.70, 0.75, 0.80, 0.85}; //power settings for the bottom flywheel
+    private double[] bottomPowers = {0.75, 0.40, .25}; //power settings for the bottom flywheel
     private double bottomFlyPower; //power set for the bottom flywheel
 
     //Strings for telemetry messages
@@ -48,6 +49,8 @@ public class Flywheel
         //float means the motor stops and then floats, no resistance against external force
         topFly.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         bottomFly.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        //topFly.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void runFlywheel(boolean rBumper)
@@ -93,21 +96,6 @@ public class Flywheel
                 break;
             case 1:
                 chosenMotorToChange = "Bottom Flywheel";
-                break;
-        }
-    }
-
-    public void changeRPM(boolean up, boolean down)
-    {
-        switch(motorToggle.currentState())
-        {
-            case 0:
-                if(up) {topFlyPower++;}
-                else {topFlyPower--;}
-                break;
-            case 1:
-                if(up) {bottomFlyPower++;}
-                else {bottomFlyPower--;}
                 break;
         }
     }
